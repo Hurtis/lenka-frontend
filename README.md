@@ -1,10 +1,7 @@
-# vue-project
+# Lenka Frontend
 
 Chatbot Lenka is a virtual English teacher. The repository contains its frontend part.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+You can find the application at <a href"https://lenka.hurtis.sk">www.lenka.hurtis.sk</a>
 
 ## Customize configuration
 
