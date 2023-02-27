@@ -1,7 +1,7 @@
 # Lenka Frontend
 
 Chatbot Lenka is a virtual English teacher. The repository contains its frontend part.
-You can find the application at <a href"https://lenka.hurtis.sk">www.lenka.hurtis.sk</a>
+You can find the application at <a href="https://lenka.hurtis.sk">lenka.hurtis.sk</a>
 
 ## Customize configuration
 
