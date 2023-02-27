@@ -4,7 +4,7 @@
       <ul>
         <li v-for="(message, index) in data.messages" :key="index">
           <Transition name="bounce" mode="out-in" appear>
-            <ChatMessage :message="message" />
+            <ChatMessage :message="message" v-if="message.text !== null" />
           </Transition>
         </li>
       </ul>
@@ -98,27 +98,30 @@ function fetchData(myData) {
 
 function getLocalData(userText) {
   let customerText = unifieString(userText);
-  console.log(customerText);
   let text = "";
+  let color = "basic";
   if (customerText === "zacat") {
     text = 'Prelož do angličtiny: "' + getNewLocalWord() + '".';
   } else if (customerText === "neviem") {
     text =
       'Správna odpoveď je: "' +
       localActualWord +
-      '". Ďalšie slovo: "' +
+      '".::Ďalšie slovo: "' +
       getNewLocalWord() +
       '".';
+    color = "wrong";
   } else {
     if (userText === localActualWord) {
       text = 'Správe 👍, Ďalšie slovo: "' + getNewLocalWord() + '".';
+      color = "basic";
     } else {
       text =
         "Žiaľ nie. správna odpoveď bola: " +
         localActualWord +
-        '". Ďalšie slovo: "' +
+        '".::Ďalšie slovo: "' +
         getNewLocalWord() +
         '".';
+      color = "wrong";
     }
   }
   let localMessage = {
@@ -128,7 +131,7 @@ function getLocalData(userText) {
       { type: "message", text: "Neviem" },
       { type: "appLink", text: "Upraviť slovíčka", url: "/edit-custom-words" },
     ],
-    color: ["basic"],
+    color: color,
     form: { show: true, placeholder: "Napíš preklad ...", type: "text" },
   };
   createBotMessage(localMessage);

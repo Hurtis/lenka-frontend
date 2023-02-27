@@ -3,8 +3,11 @@
     <div class="message-avatar shadow-md"></div>
     <div class="message-content">
       <div
-        class="px-6 py-4 mb-2 rounded-xl shadow-md message-text w-fit"
         v-for="(content, index) in message.text.split('::')"
+        :class="
+          'px-6 py-4 mb-2 rounded-xl shadow-md message-text w-fit ' +
+          message.color
+        "
         :key="index"
       >
         {{ content }}
@@ -53,6 +56,11 @@ onMounted(() => {
     border: 1px solid #ededed;
     background-color: #fff;
     color: #333;
+  }
+  .message-text.wrong:first-of-type {
+    border: 1px solid rgb(252 165 165);
+    background-color: rgb(254 202 202);
+    color: rgb(185 28 28);
   }
 }
 .user.message-wrap {
