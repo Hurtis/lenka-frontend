@@ -1,6 +1,6 @@
 # vue-project
 
-This template should help get you started developing with Vue 3 in Vite.
+Chatbot Lenka is a virtual English teacher. The repository contains its frontend part.
 
 ## Recommended IDE Setup
 
