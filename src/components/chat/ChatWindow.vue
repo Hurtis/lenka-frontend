@@ -53,13 +53,12 @@ function createUserMessage(userMessage) {
     color: "",
   });
   if (settings.sourceType === "server") {
-    fetchData(userMessage);
+    getServerData(userMessage);
   }
   if (settings.sourceType === "local") {
     getLocalData(userMessage);
   }
 }
-
 function createBotMessage(botMessage) {
   data.messages.push({
     text: botMessage.text,
@@ -76,24 +75,23 @@ function unifieString(myString) {
   return unifiedData;
 }
 
-function fetchData(myData) {
-  let customerText = unifieString(myData);
-  let question = { question: customerText, conversation: data.conversation };
-  fetch(settings.url, {
-    method: "POST",
-    body: JSON.stringify(question),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      createBotMessage(data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      createBotMessage(errorMsg);
+async function getServerData(myData) {
+  try {
+    let customerText = unifieString(myData);
+    let question = { question: customerText, conversation: data.conversation };
+    const response = await fetch(settings.url, {
+      method: "POST",
+      body: JSON.stringify(question),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+    const serverData = await response.json();
+    createBotMessage(serverData);
+  } catch (error) {
+    console.error("Error:", error);
+    createBotMessage(errorMsg);
+  }
 }
 
 function getLocalData(userText) {
@@ -144,14 +142,13 @@ function getNewLocalWord() {
   if (localIndexWord === items.length) {
     localIndexWord = 0;
   }
-  //let item = items[Math.floor(Math.random() * items.length)];
   localActualWord = item.en;
   return item.sk;
 }
 
 onMounted(() => {
   if (settings.sourceType === "server") {
-    fetchData("start");
+    getServerData("start");
   } else if (settings.startMessage !== "") {
     createBotMessage(settings.startMessage);
   } else {
@@ -161,6 +158,13 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+.chat-container {
+  max-width: 640px;
+  padding-top: 100px;
+  .chat-panel {
+    padding-bottom: 100px;
+  }
+}
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }
