@@ -17,7 +17,8 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, computed } from "vue";
+import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
 const { message } = defineProps(["message"]);
 onMounted(() => {
   window.scrollTo(0, document.body.scrollHeight - 50);
@@ -31,6 +32,9 @@ onMounted(() => {
   .message-content {
     display: flex;
     flex-direction: column;
+  }
+  .message-more {
+    cursor: pointer;
   }
 }
 .user.message-wrap {

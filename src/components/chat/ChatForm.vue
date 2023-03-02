@@ -44,9 +44,6 @@ function formSubmited() {
   position: fixed;
 }
 @media (min-width: 768px) {
-  .form {
-    margin-top: 100px;
-  }
   .textarea {
     position: static;
   }

@@ -4,6 +4,7 @@ let actualLocalIndex = ref(0);
 export function useFetchLocal(userText) {
   let text = "";
   let color = "basic";
+  let correctAnswer = 2;
   if (userText === "zacat") {
     text = 'Prelož do angličtiny: "' + getNewLocalWord() + '".';
   } else if (userText === "neviem") {
@@ -14,9 +15,11 @@ export function useFetchLocal(userText) {
       getNewLocalWord() +
       '".';
     color = "wrong";
+    correctAnswer = 0;
   } else {
     if (userText === actualLocalWord.value) {
       text = 'Správe 👍, Ďalšie slovo: "' + getNewLocalWord() + '".';
+      correctAnswer = 1;
       color = "basic";
     } else {
       text =
@@ -26,6 +29,7 @@ export function useFetchLocal(userText) {
         getNewLocalWord() +
         '".';
       color = "wrong";
+      correctAnswer = 0;
     }
   }
 
@@ -42,6 +46,7 @@ export function useFetchLocal(userText) {
     ],
     color: color,
     form: { show: true, placeholder: "Napíš preklad ...", type: "text" },
+    correctAnswer: correctAnswer,
   };
   function getNewLocalWord() {
     let items = JSON.parse(localStorage.getItem("customWords"));

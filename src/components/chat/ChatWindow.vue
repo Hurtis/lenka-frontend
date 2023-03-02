@@ -14,6 +14,9 @@
         :buttons="data.messages[data.messages.length - 1].buttons"
         @sendChoice="createUserMessage($event)"
       />
+      <div v-if="data.score.all > 0" class="score">
+        skóre: {{ data.score.success }}/{{ data.score.all }}
+      </div>
     </div>
     <ChatForm
       @formSent="createUserMessage($event)"
@@ -27,6 +30,7 @@
 import ChatMessage from "@/components/chat/ChatMessage.vue";
 import SuggestButtons from "@/components/chat/SuggestButtons.vue";
 import ChatForm from "@/components/chat/ChatForm.vue";
+import SecondHeader from "@/components/ui/SecondHeader.vue";
 import { useFetchLocal } from "@/composable/useFetchLocal.js";
 import { reactive, onMounted } from "vue";
 const { settings } = defineProps(["settings"]);
@@ -36,6 +40,10 @@ const data = reactive({
   typing: false,
   form: null,
   menu: false,
+  score: {
+    success: 0,
+    all: 0,
+  },
 });
 const errorMsg = {
   text: "Niečo sa pokazilo. Skús mi napísať neskôr.",
@@ -72,6 +80,15 @@ function createBotMessage(botMessage) {
   });
   data.conversation = botMessage.conversation;
   data.form = botMessage.form;
+  if (botMessage.correctAnswer < 2) {
+    if (botMessage.correctAnswer === 1) {
+      data.score.success++;
+      data.score.all++;
+    }
+    if (botMessage.correctAnswer === 0) {
+      data.score.all++;
+    }
+  }
 }
 
 function unifieString(myString) {
@@ -114,6 +131,11 @@ onMounted(() => {
   padding-top: 100px;
   .chat-panel {
     padding-bottom: 100px;
+  }
+  .score {
+    color: #666;
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 .bounce-enter-active {
