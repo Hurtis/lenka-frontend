@@ -30,7 +30,6 @@
 import ChatMessage from "@/components/chat/ChatMessage.vue";
 import SuggestButtons from "@/components/chat/SuggestButtons.vue";
 import ChatForm from "@/components/chat/ChatForm.vue";
-import SecondHeader from "@/components/ui/SecondHeader.vue";
 import { useFetchLocal } from "@/composable/useFetchLocal.js";
 import { reactive, onMounted } from "vue";
 const { settings } = defineProps(["settings"]);

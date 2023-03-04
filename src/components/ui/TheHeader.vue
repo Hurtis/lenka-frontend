@@ -11,37 +11,15 @@
             <button
               type="button"
               class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              @click="menu.open = !menu.open"
+              @click="open = !open"
             >
               <span class="sr-only">Open main menu</span>
-              <svg
-                :class="`h-6 w-6 ${menu.open ? 'hidden' : 'block'}`"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-
-              <svg
-                :class="`h-6 w-6 ${menu.open ? 'block' : 'hidden'}`"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <Bars3Icon
+                :class="`h-6 w-6 text-white ${open ? 'hidden' : 'block'}`"
+              />
+              <XMarkIcon
+                :class="`h-6 w-6 text-white ${open ? 'block' : 'hidden'}`"
+              />
             </button>
           </div>
           <div
@@ -49,14 +27,13 @@
           >
             <div class="hidden md:ml-6 md:block">
               <div class="flex space-x-4">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <RouterLink
-                  v-for="(item, index) in menu.items"
-                  :key="index"
-                  :to="item.to"
+                  to="/"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >{{ item.text }}</RouterLink
+                  >Domov</RouterLink
                 >
+                <DropdownBtn :content="menu.words" />
+                <DropdownBtn :content="menu.grammar" />
               </div>
             </div>
           </div>
@@ -71,18 +48,27 @@
         leave-from-class="opacity-100 translate-y-0"
         leave-to-class="opacity-0 translate-y-1"
       >
-        <div :class="`md:hidden ${menu.open ? 'active' : 'hidden'}`">
-          <div class="space-y-1 px-2 pt-2 pb-3">
+        <div :class="`md:hidden ${open ? 'active' : 'hidden'} pb-3`">
+          <div class="space-y-1 px-2 pt-2">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <RouterLink
-              v-for="(item, index) in menu.items"
-              :key="index"
-              :to="item.to"
-              @click="menu.open = !menu.open"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page"
-              >{{ item.text }}</RouterLink
+              to="/"
+              class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              @click="open = false"
+              >Domov</RouterLink
             >
+          </div>
+          <div class="space-y-1 px-2">
+            <MenuAccordeon
+              :content="menu.words"
+              @sendCloseMenu="open = false"
+            />
+          </div>
+          <div class="space-y-1 px-2">
+            <MenuAccordeon
+              :content="menu.grammar"
+              @sendCloseMenu="open = false"
+            />
           </div>
         </div>
       </transition>
@@ -92,24 +78,31 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import { reactive } from "vue";
-
+import { reactive, ref, onMounted } from "vue";
+import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
+import DropdownBtn from "@/components/ui/DropdownBtn.vue";
+import MenuAccordeon from "@/components/ui/MenuAccordeon.vue";
+const open = ref(false);
 let menu = reactive({
-  open: false,
-  items: [
-    { text: "Slovíčka", to: "/words" },
-    { text: "Vlastné slovíčka", to: "/custom-words" },
-    { text: "Predložky", to: "/prepositions" },
-    { text: "Nepravidelné slovesá", to: "/irregular-verbs" },
-  ],
+  words: {
+    title: "Slovná zásoba",
+    items: [
+      { text: "Slová podľa tém", to: "/words" },
+      { text: "Vlastné slová", to: "/custom-words" },
+      { text: "Upraviť vlastné slová", to: "/edit-custom-words" },
+    ],
+  },
+  grammar: {
+    title: "Gramatika",
+    items: [
+      { text: "Predložky", to: "/prepositions" },
+      { text: "Nepravidelné slovesá", to: "/irregular-verbs" },
+    ],
+  },
 });
+function closeMenu(text) {
+  console.log(text);
+}
 </script>
-<style lang="scss" scoped>
-.router-link-active {
-  background-color: rgb(17 24 39);
-}
-.brand.router-link-active {
-  background-color: none;
-}
-</style>
+
 

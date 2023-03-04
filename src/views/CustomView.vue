@@ -5,9 +5,7 @@
 </template>
 
 <script setup>
-import SecondHeader from "@/components/ui/SecondHeader.vue";
 import ChatWindow from "@/components/chat/ChatWindow.vue";
-//import { reactive, onMounted } from "vue";
 
 let localitems = JSON.parse(localStorage.getItem("customWords"));
 let myMessage = {};

@@ -1,5 +1,5 @@
 <template>
-  <div class="chat-container py-8 px-2 mx-auto">
+  <div class="py-8 mx-auto max-w-7xl px-6 lg:px-8">
     <h3 class="font-bold mb-5">Pridaj si vlastné slovičko</h3>
     <form @submit.prevent="addNewWord()">
       <div class="overflow-hidden shadow sm:rounded-md mb-4">
