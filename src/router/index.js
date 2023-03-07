@@ -6,6 +6,7 @@ import EditWordsView from "../views/EditWordsView.vue";
 import CustomView from "../views/CustomView.vue";
 import WordsView from "../views/WordsView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import AsLikeView from "../views/AsLikeView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
@@ -29,6 +30,11 @@ const router = createRouter({
       path: "/prepositions",
       name: "prepositions",
       component: PrepView,
+    },
+    {
+      path: "/as-like",
+      name: "as-like",
+      component: AsLikeView,
     },
     {
       path: "/edit-custom-words",

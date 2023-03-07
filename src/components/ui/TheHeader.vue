@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="bg-gray-800 fixed w-full z-10">
-      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl px-2 lg:px-8">
         <div class="relative flex h-16 items-center">
           <RouterLink to="/" class="text-white font-bold brand">
             Chatbot Lenka
@@ -32,8 +32,8 @@
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >Domov</RouterLink
                 >
-                <DropdownBtn :content="menu.words" />
-                <DropdownBtn :content="menu.grammar" />
+                <DropdownMenu :content="words" />
+                <DropdownMenu :content="grammar" />
               </div>
             </div>
           </div>
@@ -59,16 +59,10 @@
             >
           </div>
           <div class="space-y-1 px-2">
-            <MenuAccordeon
-              :content="menu.words"
-              @sendCloseMenu="open = false"
-            />
+            <MenuAccordeon :content="words" @sendCloseMenu="open = false" />
           </div>
           <div class="space-y-1 px-2">
-            <MenuAccordeon
-              :content="menu.grammar"
-              @sendCloseMenu="open = false"
-            />
+            <MenuAccordeon :content="grammar" @sendCloseMenu="open = false" />
           </div>
         </div>
       </transition>
@@ -78,28 +72,29 @@
 
 <script setup>
 import { RouterLink } from "vue-router";
-import { reactive, ref, onMounted } from "vue";
-import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
-import DropdownBtn from "@/components/ui/DropdownBtn.vue";
+import { ref } from "vue";
+import { Bars3Icon, XMarkIcon, Cog8ToothIcon } from "@heroicons/vue/24/outline";
+import DropdownMenu from "@/components/ui/DropdownMenu.vue";
 import MenuAccordeon from "@/components/ui/MenuAccordeon.vue";
 const open = ref(false);
-let menu = reactive({
-  words: {
-    title: "Slovná zásoba",
-    items: [
-      { text: "Slová podľa tém", to: "/words" },
-      { text: "Vlastné slová", to: "/custom-words" },
-      { text: "Upraviť vlastné slová", to: "/edit-custom-words" },
-    ],
-  },
-  grammar: {
-    title: "Gramatika",
-    items: [
-      { text: "Predložky", to: "/prepositions" },
-      { text: "Nepravidelné slovesá", to: "/irregular-verbs" },
-    ],
-  },
-});
+
+const words = {
+  title: "Slovná zásoba",
+  items: [
+    { text: "Slová podľa tém", to: "/words" },
+    { text: "Vlastné slová", to: "/custom-words" },
+    { text: "Upraviť vlastné slová", to: "/edit-custom-words" },
+  ],
+};
+const grammar = {
+  title: "Gramatika",
+  items: [
+    { text: "Predložky", to: "/prepositions" },
+    { text: "Nepravidelné slovesá", to: "/irregular-verbs" },
+    { text: "As a Like", to: "/as-like" },
+  ],
+};
+
 function closeMenu(text) {
   console.log(text);
 }

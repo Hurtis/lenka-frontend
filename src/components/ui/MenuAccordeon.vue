@@ -22,7 +22,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { ChevronDownIcon } from "@heroicons/vue/24/outline";
+import { ChevronDownIcon } from "@heroicons/vue/20/solid";
 const { content } = defineProps(["content"]);
 const componentRef = ref(null);
 const open = ref(false);
