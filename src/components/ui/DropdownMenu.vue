@@ -5,10 +5,7 @@
         class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-300 hover:bg-gray-700"
       >
         {{ content.title }}
-        <ChevronDownIcon
-          class="-mr-1 h-5 w-5 text-gray-400"
-          aria-hidden="true"
-        />
+        <ChevronDownIcon class="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
       </MenuButton>
     </div>
 
@@ -36,7 +33,7 @@
 </template>
 
 <script setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import { ChevronDownIcon } from "@heroicons/vue/20/solid";
-const { content } = defineProps(["content"]);
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+const { content } = defineProps(['content'])
 </script>

@@ -3,9 +3,7 @@
     <nav class="bg-gray-800 fixed w-full z-10">
       <div class="mx-auto max-w-7xl px-2 lg:px-8">
         <div class="relative flex h-16 items-center">
-          <RouterLink to="/" class="text-white font-bold brand">
-            Chatbot Lenka
-          </RouterLink>
+          <RouterLink to="/" class="text-white font-bold brand"> Chatbot Lenka </RouterLink>
           <div class="absolute inset-y-0 right-0 flex items-center md:hidden">
             <!-- menu button-->
             <button
@@ -14,17 +12,11 @@
               @click="open = !open"
             >
               <span class="sr-only">Open main menu</span>
-              <Bars3Icon
-                :class="`h-6 w-6 text-white ${open ? 'hidden' : 'block'}`"
-              />
-              <XMarkIcon
-                :class="`h-6 w-6 text-white ${open ? 'block' : 'hidden'}`"
-              />
+              <Bars3Icon :class="`h-6 w-6 text-white ${open ? 'hidden' : 'block'}`" />
+              <XMarkIcon :class="`h-6 w-6 text-white ${open ? 'block' : 'hidden'}`" />
             </button>
           </div>
-          <div
-            class="flex flex-1 items-center justify-center md:items-stretch md:justify-end"
-          >
+          <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-end">
             <div class="hidden md:ml-6 md:block">
               <div class="flex space-x-4">
                 <RouterLink
@@ -71,33 +63,31 @@
 </template>
 
 <script setup>
-import { RouterLink } from "vue-router";
-import { ref } from "vue";
-import { Bars3Icon, XMarkIcon, Cog8ToothIcon } from "@heroicons/vue/24/outline";
-import DropdownMenu from "@/components/ui/DropdownMenu.vue";
-import MenuAccordeon from "@/components/ui/MenuAccordeon.vue";
-const open = ref(false);
+import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
+import { Bars3Icon, XMarkIcon, Cog8ToothIcon } from '@heroicons/vue/24/outline'
+import DropdownMenu from '@/components/ui/DropdownMenu.vue'
+import MenuAccordeon from '@/components/ui/MenuAccordeon.vue'
+const open = ref(false)
 
 const words = {
-  title: "Slovná zásoba",
+  title: 'Slovná zásoba',
   items: [
-    { text: "Slová podľa tém", to: "/words" },
-    { text: "Vlastné slová", to: "/custom-words" },
-    { text: "Upraviť vlastné slová", to: "/edit-custom-words" },
-  ],
-};
+    { text: 'Slová podľa tém', to: '/words' },
+    { text: 'Vlastné slová', to: '/custom-words' },
+    { text: 'Upraviť vlastné slová', to: '/edit-custom-words' }
+  ]
+}
 const grammar = {
-  title: "Gramatika",
+  title: 'Gramatika',
   items: [
-    { text: "Predložky", to: "/prepositions" },
-    { text: "Nepravidelné slovesá", to: "/irregular-verbs" },
-    { text: "As a Like", to: "/as-like" },
-  ],
-};
+    { text: 'Predložky', to: '/prepositions' },
+    { text: 'Nepravidelné slovesá', to: '/irregular-verbs' },
+    { text: 'As a Like', to: '/as-like' }
+  ]
+}
 
 function closeMenu(text) {
-  console.log(text);
+  console.log(text)
 }
 </script>
-
-

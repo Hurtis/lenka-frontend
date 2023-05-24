@@ -5,10 +5,10 @@
 </template>
 
 <script setup>
-import ChatWindow from "@/components/chat/ChatWindow.vue";
+import ChatWindow from '@/components/chat/ChatWindow.vue'
 const settings = {
-  sourceType: "server",
-  url: "https://lenka.hurtis.sk/api/prepositions.php",
-  startMessage: "",
-};
+  sourceType: 'server',
+  url: 'https://lenka.hurtis.sk/api/prepositions.php',
+  startMessage: ''
+}
 </script>

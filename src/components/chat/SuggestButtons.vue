@@ -20,5 +20,5 @@
 </template>
 
 <script setup>
-const { buttons } = defineProps(["buttons"]);
+const { buttons } = defineProps(['buttons'])
 </script>

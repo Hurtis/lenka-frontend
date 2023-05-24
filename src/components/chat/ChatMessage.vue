@@ -4,10 +4,7 @@
     <div class="message-content">
       <div
         v-for="(content, index) in message.text.split('::')"
-        :class="
-          'px-6 py-4 mb-2 rounded-xl shadow-md message-text w-fit ' +
-          message.color
-        "
+        :class="'px-6 py-4 mb-2 rounded-xl shadow-md message-text w-fit ' + message.color"
         :key="index"
       >
         {{ content }}
@@ -17,12 +14,11 @@
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
-import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
-const { message } = defineProps(["message"]);
+import { onMounted } from 'vue'
+const { message } = defineProps(['message'])
 onMounted(() => {
-  window.scrollTo(0, document.body.scrollHeight - 50);
-});
+  window.scrollTo(0, document.body.scrollHeight - 50)
+})
 </script>
 
 <style lang="scss" scoped>
